@@ -31,10 +31,10 @@
           $output .= "<a href='javascript:void(0)' class='session-title' sessionid='" . $sessionID . "'>Session #" . $sessionID . "</a>";
         $output .= "</div>";
         $output .= "<div class='col-xs-4 text-right'>";
-          $output .= $sessionStart;
+          $output .= getReadableDatetime($sessionStart);
         $output .= "</div>";
         $output .= "<div class='col-xs-4 text-right'>";
-          $output .= $sessionEnd;
+          $output .= getReadableDatetime($sessionEnd);
         $output .= "</div>";
       $output .= "</div>";
 
@@ -44,6 +44,15 @@
     $output .= "</div>";
 
     return $output;
+  }
+
+  function getReadableDatetime($datetime) {
+    $date = date("jS F", strtotime($datetime));
+    $time = date("H:i:s A", strtotime($datetime));
+
+    $datetime = $date . " - " . $time;
+
+    return $datetime;
   }
 
 ?>
