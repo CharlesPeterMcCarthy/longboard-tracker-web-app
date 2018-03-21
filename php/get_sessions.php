@@ -25,7 +25,7 @@
       /*    Get skate sessions above supplied sessionID (new sessions)  */
 
   function GetSessions($conn, $sessionID) {
-    $sql = "SELECT session_id, session_start, session_end
+    $sql = "SELECT session_id, session_start, session_end, session_distance
       FROM skate_sessions
       WHERE session_id > ?
       ORDER BY session_id
@@ -43,13 +43,14 @@
       $sessions = [];
 
       if ($rows) {
-        $stmt->bind_result($sessionID, $sessionStart, $sessionEnd);
+        $stmt->bind_result($sessionID, $sessionStart, $sessionEnd, $sessionDistance);
 
         while ($stmt->fetch()) {
           $session = [
             'sessionID' => $sessionID,
             'sessionStart' => $sessionStart,
-            'sessionEnd' => $sessionEnd
+            'sessionEnd' => $sessionEnd,
+            'sessionDistance' => $sessionDistance
           ];
 
           array_push($sessions, $session);

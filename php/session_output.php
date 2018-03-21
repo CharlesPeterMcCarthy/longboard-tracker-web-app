@@ -22,6 +22,7 @@
     $sessionID = $session['sessionID'];
     $sessionStart = $session['sessionStart'];
     $sessionEnd = $session['sessionEnd'];
+    $sessionDistance = $session['sessionDistance'];
 
     $output = "";
 
@@ -39,6 +40,10 @@
       $output .= "</div>";
 
       $output .= "<div id='graph-block-" . $sessionID . "' class='graph-block hidden'>";
+        $output .= "<div class='skate-extra-info'>";
+          $output .= "Skate Length: " . getSecsBetween($sessionStart, $sessionEnd) . " Seconds<br>";
+          $output .= "Skate Distance: " . $sessionDistance . " KM";
+        $output .= "</div>";
         $output .= "<div id='graph-" . $sessionID . "' style='height: 300px; width: 100%;'></div>";
       $output .= "</div>";
     $output .= "</div>";
@@ -53,6 +58,12 @@
     $datetime = $date . " - " . $time;
 
     return $datetime;
+  }
+
+  function getSecsBetween($datetime1, $datetime2) {
+    $mins = date(strtotime($datetime2) - strtotime($datetime1));
+
+    return $mins;
   }
 
 ?>
