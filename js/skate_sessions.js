@@ -39,9 +39,9 @@ $(document).ready(function() {
     });
   }
 
-  function GetSpeeds(sessions) {
+  function GetSpeeds(tempSessions) {
     var info = {
-      'sessions' : sessions
+      'sessions' : tempSessions
     };
 
     $.ajax({
@@ -55,7 +55,7 @@ $(document).ready(function() {
         console.log(response);
 
         if (response['isOk']) {
-          var sessions = response['sessions'];
+          sessions = response['sessions'];
 
           GetSessionOutputs(sessions);
         }
@@ -99,6 +99,62 @@ $(document).ready(function() {
     for (var i = 0; i < outputs.length; i++) {
       $(outputs[i]).prependTo($("#session-list")).hide().fadeIn();
     }
+  }
+
+  $(document).on('click', '.session-title', function() {
+    var sessionID = $(this).attr('sessionid');
+
+    ShowSessionInfo(sessionID);
+    ShowGraph(sessionID);
+  });
+
+  function ShowSessionInfo(sessionID) {
+    $("#graph-block-" + sessionID).removeClass("hidden").hide().slideDown();
+  }
+
+  function ShowGraph(sessionID) {
+    var speed;
+    var speeds = [];
+    var data = [];
+    var dataSeries = { type: "line" };
+    var dataPoints = [];
+
+    for (var i = 0; i < sessions.length; i++) {
+      var curSession = sessions[i];
+
+      if (curSession['sessionID'] == sessionID) {
+        speeds = curSession['speeds'];
+        console.log(curSession);
+        console.log(speeds);
+        break;
+      }
+    }
+
+    for (var i = 0; i < speeds.length; i++) {
+      speed = parseFloat(speeds[i]['speedKPH']);
+
+      dataPoints.push({
+        x: i * 2,
+        y: speed
+      });
+    }
+
+    dataSeries.dataPoints = dataPoints;
+    data.push(dataSeries);
+
+    var options = {
+      zoomEnabled: true,
+      animationEnabled: true,
+      title: {
+        text: "Session #" + sessionID + " Data"
+      },
+      axisY: {
+        includeZero: false
+      },
+      data: data  // random data
+    };
+
+    $("#graph-" + sessionID).CanvasJSChart(options);
   }
 
 });

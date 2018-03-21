@@ -19,3 +19,7 @@ a.session-title {
 a.session-title:hover {
   color:#DDD;
 }
+
+div.graph-block {
+  margin-top:15px;
+}
