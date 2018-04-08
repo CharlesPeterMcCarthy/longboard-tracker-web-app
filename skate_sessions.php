@@ -18,7 +18,7 @@
         <div id='main'>
           <h1 class='text-center'>Skate Sessions</h1>
 
-          <div id='no-sessions-notice'>No Skate Sessions Yet.</div>
+          <div id='no-sessions-notice' class='text-center'>No Skate Sessions Yet.</div>
           <div id='session-list'>
 
           </div>
