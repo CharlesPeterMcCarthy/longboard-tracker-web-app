@@ -23,20 +23,33 @@ $(document).ready(function() {
         console.log(response);
 
         if (response['isOk']) {
-          var sessions = response['sessions'];
+          if (response['hasSessions']) {
+            var sessions = response['sessions'];
 
-          GetSpeeds(sessions);
+            SetLastSessionID(sessions);
+            GetSpeeds(sessions);
+          }
         }
 
-        //setTimeout(function() {
-          //GetSessions();
-        //}, 5000);
+        setTimeout(function() {
+          GetSessions();
+        }, 10000);
       },
       error : function(response) {
         var error = response.responseText;
         console.log(error);
       }
     });
+  }
+
+  function SetLastSessionID(sessions) {
+    for (var i = 0; i < sessions.length; i++) {
+      var curSession = sessions[i];
+
+      if (curSession['sessionID'] > lastSessionID) {
+        lastSessionID = curSession['sessionID'];
+      }
+    }
   }
 
   function GetSpeeds(tempSessions) {
@@ -151,7 +164,7 @@ $(document).ready(function() {
       axisY: {
         includeZero: false
       },
-      data: data  // random data
+      data: data
     };
 
     $("#graph-" + sessionID).CanvasJSChart(options);
