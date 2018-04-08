@@ -28,6 +28,7 @@ $(document).ready(function() {
 
             SetLastSessionID(sessions);
             GetSpeeds(sessions);
+            RemoveNoSessionsNotice();
           }
         }
 
@@ -49,6 +50,12 @@ $(document).ready(function() {
       if (curSession['sessionID'] > lastSessionID) {
         lastSessionID = curSession['sessionID'];
       }
+    }
+  }
+
+  function RemoveNoSessionsNotice() {
+    if ($("#no-sessions-notice").is(':visible')) {
+      $("#no-sessions-notice").fadeOut();
     }
   }
 
