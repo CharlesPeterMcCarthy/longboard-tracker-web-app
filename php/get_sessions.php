@@ -29,7 +29,7 @@
       FROM skate_sessions
       WHERE session_id > ?
       ORDER BY session_id
-      DESC";
+      ASC";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $sessionID);
