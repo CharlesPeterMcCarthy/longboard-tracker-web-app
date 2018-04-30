@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     $.ajax({
       type: 'POST',
-      url: "/arduino/php/get_sessions.php",
+      url: "php/get_sessions.php",
       data : {
         info : JSON.stringify(info)
       },
@@ -66,7 +66,7 @@ $(document).ready(function() {
 
     $.ajax({
       type: 'POST',
-      url: "/arduino/php/get_speeds.php",
+      url: "php/get_speeds.php",
       data : {
         info : JSON.stringify(info)
       },
@@ -94,7 +94,7 @@ $(document).ready(function() {
 
     $.ajax({
       type: 'POST',
-      url: "/arduino/php/session_output.php",
+      url: "php/session_output.php",
       data : {
         info : JSON.stringify(info)
       },

@@ -4,7 +4,7 @@
     $info = json_decode($_POST['info'], true);
     $sessionID = $info['lastSessionID'];
 
-    include_once $_SERVER['DOCUMENT_ROOT'] . "/arduino/php/db_conn.php";
+    include_once "db_conn.php";
 
     $conn = getConn();
     $conn->begin_transaction();
