@@ -31,3 +31,9 @@ div #no-sessions-notice {
 .modal-dialog h4 {
   color:#333;
 }
+
+.btn-default {
+  color:white;
+  background-color:#aaa;
+  border:1px solid #999;
+}

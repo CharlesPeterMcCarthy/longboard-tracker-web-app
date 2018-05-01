@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 
+<?php
+
+  session_start();
+
+  if (isset($_GET['sessionID'])) {
+    $_SESSION['preset_session_ID'] = $_GET['sessionID'];
+  }
+
+?>
+
 <html lang='en'>
   <head>
     <title>Skate Sessions</title>
@@ -15,24 +25,25 @@
   <body>
 
     <div class='row'>
-      <button id='login-modal-trigger-btn' data-toggle='modal' data-target='#login-modal'>Login</button>
-      <button id='logout-btn'>Logout</button>
       <div class='col-xs-12 col-sm-offset-2 col-sm-8'>
         <div id='main'>
+          <div class='text-right'>
+            <?php
+
+              if (isset($_SESSION['arduino']) && isset($_SESSION['arduino']['userEmail'])) {
+                echo "<button id='logout-btn' class='btn btn-xs btn-default'><i class='glyphicon glyphicon-log-out'></i> Logout</button>";
+              } else {
+                echo "<button id='login-modal-trigger-btn' class='btn btn-xs btn-default' data-toggle='modal' data-target='#login-modal'><i class='glyphicon glyphicon-log-in'></i> Login</button>";
+              }
+
+            ?>
+          </div>
+
           <h1 class='text-center'>Skate Sessions</h1>
-
-          <?php
-
-            if (isset($_GET['sessionID']) && isset($_GET['deviceID'])) {
-              $_SESSION['sessionID'] = $_GET['sessionID'];
-              $_SESSION['deviceID'] = $_GET['deviceID'];
-            }
-
-          ?>
 
           <div id='no-sessions-notice' class='text-center'>No Skate Sessions Yet.</div>
           <div id='session-list'>
-
+            <!-- Populated by JS -->
           </div>
         </div>
       </div>
