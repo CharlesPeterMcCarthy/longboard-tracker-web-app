@@ -9,7 +9,7 @@
     $conn = getConn();
     $conn->begin_transaction();
 
-    $response = GetSessions($conn, $sessionID);
+    $response = GetSessions($conn, $sessionID, false);
 
     if ($response['isOk']) {
       $conn->commit();
@@ -24,11 +24,12 @@
 
       /*    Get skate sessions above supplied sessionID (new sessions)  */
 
-  function GetSessions($conn, $sessionID) {
+  function GetSessions($conn, $sessionID, $singleOnly) {
     $sql = "SELECT session_id, session_start, session_end, session_distance
       FROM skate_sessions
-      WHERE session_id > ?
-      ORDER BY session_id
+      WHERE session_id"
+    $sql .= $singleOnly ? " = " : " > ";
+    $sql .= "ORDER BY session_id
       ASC";
 
     $stmt = $conn->prepare($sql);

@@ -5,6 +5,7 @@
     <title>Skate Sessions</title>
     <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script src='js/skate_sessions.js'></script>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
@@ -14,13 +15,42 @@
   <body>
 
     <div class='row'>
+      <button id='login-modal-trigger-btn' data-toggle='modal' data-target='#login-modal'>Login</button>
       <div class='col-xs-12 col-sm-offset-2 col-sm-8'>
         <div id='main'>
           <h1 class='text-center'>Skate Sessions</h1>
 
+          <?php
+
+            if (isset($_GET['sessionID']) && isset($_GET['deviceID'])) {
+              $_SESSION['sessionID'] = $_GET['sessionID'];
+              $_SESSION['deviceID'] = $_GET['deviceID'];
+            }
+
+          ?>
+
           <div id='no-sessions-notice' class='text-center'>No Skate Sessions Yet.</div>
           <div id='session-list'>
 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id='login-modal' class='modal fade' role='dialog'>
+      <div class='modal-dialog modal-sm'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <button type='button' class='close' data-dismiss='modal' action='close-modal'>&times;</button>
+            <h4 class='modal-title'>Login</h4>
+          </div>
+          <div class='modal-body'>
+            <input type='text' id='login-email' class='form-control' placeholder="Email">
+            <input type='password' id='login-pass' class='form-control' placeholder="Password">
+          </div>
+          <div class='modal-footer'>
+            <button class='btn btn-default' data-dismiss='modal' id='close-btn'>Cancel</button>
+            <button class='btn btn-default' id='login-btn'>Login</button>
           </div>
         </div>
       </div>

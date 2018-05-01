@@ -27,3 +27,7 @@ div #no-sessions-notice {
   font-weight:bold;
   padding:5px;
 }
+
+.modal-dialog h4 {
+  color:#333;
+}

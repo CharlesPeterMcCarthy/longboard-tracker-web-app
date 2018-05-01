@@ -4,8 +4,47 @@ $(document).ready(function() {
   var lastSessionID = 0;
 
   $(function() {
-    GetSessions();
+    //GetSessions();
+    PromptLogin();
   });
+
+  function PromptLogin() {
+    $("#login-modal-trigger-btn").click();
+  }
+
+  $(document).on('click', '#login-btn', function() {
+    var email = $("#login-email").val();
+    var pass = $("#login-pass").val();
+
+    AttemptLogin(email, pass);
+  });
+
+  function AttemptLogin(email, pass) {
+    var info = {
+      'email' : email,
+      'pass' : pass
+    };
+
+    $.ajax({
+      type: 'POST',
+      url: "php/login.php",
+      data : {
+        info : JSON.stringify(info)
+      },
+      dataType : 'json',
+      success: function(response){
+        console.log(response);
+
+        if (response['isOk']) {
+          
+        }
+      },
+      error : function(response) {
+        var error = response.responseText;
+        console.log(error);
+      }
+    });
+  }
 
   function GetSessions() {
     var info = {
