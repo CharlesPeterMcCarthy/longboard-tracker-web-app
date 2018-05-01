@@ -46,6 +46,10 @@
             <!-- Populated by JS -->
           </div>
         </div>
+
+        <footer>
+          <small>Arduino Longboard Project</small>
+        </footer>
       </div>
     </div>
 
