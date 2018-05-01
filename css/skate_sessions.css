@@ -10,6 +10,15 @@ div.session-block {
   padding:8px;
 }
 
+div.session-block.preset {
+  background-color:#ffe66d!important;
+  color:black!important;
+}
+
+div.session-block.preset a, div.session-block.preset span {
+  color:#333!important;
+}
+
 a.session-title {
   font-weight:bold;
   text-decoration:underline;

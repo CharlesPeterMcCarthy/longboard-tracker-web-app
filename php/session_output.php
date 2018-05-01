@@ -1,5 +1,7 @@
 <?php
 
+  session_start();
+
   if (isset($_POST['info'])) {
     $info = json_decode($_POST['info'], true);
 
@@ -23,26 +25,35 @@
     $sessionStart = $session['sessionStart'];
     $sessionEnd = $session['sessionEnd'];
     $sessionDistance = $session['sessionDistance'];
+    $presetSessionID = 0;
 
     $output = "";
 
-    $output .= "<div class='session-block'>";
+    $output .= "<div class='session-block";
+      if (isset($_SESSION['preset_session_ID']) && $_SESSION['preset_session_ID'] == $sessionID) {
+          // User has been directed here to view specific session
+          // Show this session as highlighted
+        $output .= " preset'>";
+        unset($_SESSION['preset_session_ID']);
+      } else {
+        $output .= "'>";
+      }
       $output .= "<div class='row'>";
         $output .= "<div class='col-xs-4'>";
           $output .= "<a href='javascript:void(0)' class='session-title' sessionid='" . $sessionID . "'>Session #" . $sessionID . "</a>";
         $output .= "</div>";
         $output .= "<div class='col-xs-4 text-right'>";
-          $output .= getReadableDatetime($sessionStart);
+          $output .= "<span>" . getReadableDatetime($sessionStart) . "</span>";
         $output .= "</div>";
         $output .= "<div class='col-xs-4 text-right'>";
-          $output .= getReadableDatetime($sessionEnd);
+          $output .= "<span>" . getReadableDatetime($sessionEnd) . "</span>";
         $output .= "</div>";
       $output .= "</div>";
 
       $output .= "<div id='graph-block-" . $sessionID . "' class='graph-block hidden'>";
         $output .= "<div class='skate-extra-info'>";
-          $output .= "Skate Length: " . getSecsBetween($sessionStart, $sessionEnd) . " Seconds<br>";
-          $output .= "Skate Distance: " . $sessionDistance . " KM";
+          $output .= "<span>Skate Length: " . getSecsBetween($sessionStart, $sessionEnd) . " Seconds</span><br>";
+          $output .= "<span>Skate Distance: " . $sessionDistance . " KM</span>";
         $output .= "</div>";
         $output .= "<div id='graph-" . $sessionID . "' style='height: 300px; width: 100%;'></div>";
       $output .= "</div>";
