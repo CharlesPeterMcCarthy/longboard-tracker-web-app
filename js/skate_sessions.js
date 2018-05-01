@@ -35,7 +35,17 @@ $(document).ready(function() {
         console.log(response);
 
         if (response['isOk']) {
-
+          if (response['validLogin']) {
+            $("#login-modal").modal("hide");
+            ClearLoginForm();
+            GetSessions();
+          } else if (!response['emailExists']) {
+            $("#login-email").css({'border' : '1px solid red'});
+            // Email wrong
+          } else {
+            $("#login-pass").css({'border' : '1px solid red'});
+            // Password wrong
+          }
         }
       },
       error : function(response) {
@@ -43,6 +53,13 @@ $(document).ready(function() {
         console.log(error);
       }
     });
+  }
+
+  function ClearLoginForm() {
+    $("#login-email").val("");
+    $("#login-pass").val("");
+    $("#login-email").css({'border' : '1px solid #ccc'});
+    $("#login-pass").css({'border' : '1px solid #ccc'});
   }
 
   function GetSessions() {
@@ -67,14 +84,14 @@ $(document).ready(function() {
             SetLastSessionID(sessions);
             GetSpeeds(sessions);
             RemoveNoSessionsNotice();
-          } else if (response['isLoggedIn'] != undefined && !response['isLoggedIn']) {
-            PromptLogin();
           }
         }
 
-        setTimeout(function() {
-          GetSessions();
-        }, 10000);
+        if (response['isLoggedIn']) {
+          setTimeout(function() {
+            GetSessions();
+          }, 10000);
+        }
       },
       error : function(response) {
         var error = response.responseText;

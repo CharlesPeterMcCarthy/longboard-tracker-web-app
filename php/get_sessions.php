@@ -16,6 +16,8 @@
     $response = GetSessions($conn, $sessionID);
 
     if ($response['isOk']) {
+      $response['isLoggedIn'] = true;
+      
       $conn->commit();
     } else {
       $conn->rollback();
