@@ -4,8 +4,7 @@ $(document).ready(function() {
   var lastSessionID = 0;
 
   $(function() {
-    //GetSessions();
-    PromptLogin();
+    GetSessions();
   });
 
   function PromptLogin() {
@@ -36,7 +35,7 @@ $(document).ready(function() {
         console.log(response);
 
         if (response['isOk']) {
-          
+
         }
       },
       error : function(response) {
@@ -68,6 +67,8 @@ $(document).ready(function() {
             SetLastSessionID(sessions);
             GetSpeeds(sessions);
             RemoveNoSessionsNotice();
+          } else if (response['isLoggedIn'] != undefined && !response['isLoggedIn']) {
+            PromptLogin();
           }
         }
 
@@ -215,5 +216,9 @@ $(document).ready(function() {
 
     $("#graph-" + sessionID).CanvasJSChart(options);
   }
+
+  $(document).on('click', '#logout-btn', function() {
+    window.location = "php/logout.php";
+  });
 
 });

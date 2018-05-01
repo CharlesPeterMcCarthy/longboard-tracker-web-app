@@ -1,6 +1,10 @@
 <?php
 
-  if (isset($_POST['info'])) {
+  session_start();
+
+  if (isset($_POST['info']) && isset($_SESSION['arduino'])
+    && isset($_SESSION['arduino']['userEmail']) && isset($_SESSION['arduino']['deviceID'])) {
+
     $info = json_decode($_POST['info'], true);
     $sessionID = $info['lastSessionID'];
 
@@ -9,7 +13,7 @@
     $conn = getConn();
     $conn->begin_transaction();
 
-    $response = GetSessions($conn, $sessionID, false);
+    $response = GetSessions($conn, $sessionID);
 
     if ($response['isOk']) {
       $conn->commit();
@@ -20,20 +24,25 @@
     $conn->close();
 
     echo json_encode($response);
+  } else {
+    echo json_encode([
+      'isOk' => false,
+      'isLoggedIn' => false
+    ]);
   }
 
       /*    Get skate sessions above supplied sessionID (new sessions)  */
 
-  function GetSessions($conn, $sessionID, $singleOnly) {
+  function GetSessions($conn, $sessionID) {
     $sql = "SELECT session_id, session_start, session_end, session_distance
       FROM skate_sessions
-      WHERE session_id"
-    $sql .= $singleOnly ? " = " : " > ";
-    $sql .= "ORDER BY session_id
+      WHERE session_id > ?
+      AND fk_device_id = ?
+      ORDER BY session_id
       ASC";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $sessionID);
+    $stmt->bind_param("ii", $sessionID, $_SESSION['arduino']['deviceID']);
 
     $isOk = $stmt->execute();
 

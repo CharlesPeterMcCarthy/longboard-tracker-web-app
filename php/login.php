@@ -22,7 +22,7 @@
     }
 
     if ($response['isOk']) {
-      if (isset($response['validLogin']) && $response['validLogin']) CreateUserSession($email);
+      if (isset($response['validLogin']) && $response['validLogin']) CreateUserSession($email, $response['deviceID']);
 
       $conn->commit();
     } else {
@@ -35,7 +35,7 @@
   }
 
   function AttemptLogin($conn, $email) {
-    $sql = "SELECT device_name, password
+    $sql = "SELECT device_id, device_name, password
       FROM approved_devices
       WHERE email = ?";
 
@@ -49,12 +49,13 @@
       $rows = $stmt->num_rows;
 
       if ($rows) {
-        $stmt->bind_result($deviceName, $hashedPass);
+        $stmt->bind_result($deviceID, $deviceName, $hashedPass);
         $stmt->fetch();
 
         $response = [
           'isOk' => true,
           'emailExists' => true,
+          'deviceID' => $deviceID,
           'deviceName' => $deviceName,
           'hashedPass' => $hashedPass
         ];
@@ -84,8 +85,9 @@
     }
   }
 
-  function CreateUserSession($email) {
-    $_SESSION['arduino']['userID'] = $email;
+  function CreateUserSession($email, $deviceID) {
+    $_SESSION['arduino']['userEmail'] = $email;
+    $_SESSION['arduino']['deviceID'] = $deviceID;
   }
 
 ?>

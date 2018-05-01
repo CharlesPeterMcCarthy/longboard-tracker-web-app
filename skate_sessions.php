@@ -16,6 +16,7 @@
 
     <div class='row'>
       <button id='login-modal-trigger-btn' data-toggle='modal' data-target='#login-modal'>Login</button>
+      <button id='logout-btn'>Logout</button>
       <div class='col-xs-12 col-sm-offset-2 col-sm-8'>
         <div id='main'>
           <h1 class='text-center'>Skate Sessions</h1>
