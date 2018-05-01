@@ -186,7 +186,15 @@ $(document).ready(function() {
   });
 
   function ShowSessionInfo(sessionID) {
-    $("#graph-block-" + sessionID).removeClass("hidden").hide().slideDown();
+    var elem = $("#graph-block-" + sessionID);
+
+    if (elem.hasClass("hidden")) {
+      elem.removeClass("hidden").hide().slideDown();
+    } else {
+      elem.slideUp(function() {
+        $(this).addClass("hidden");
+      })
+    }
   }
 
   function ShowGraph(sessionID) {
