@@ -41,7 +41,16 @@
 
           <h1 class='text-center'>Skate Sessions</h1>
 
-          <div id='no-sessions-notice' class='text-center'>No Skate Sessions Yet.</div>
+          <?php
+
+            if (isset($_SESSION['arduino']['userEmail'])) {
+              echo "<div id='main-notice' class='text-center'>No Skate Sessions Yet.</div>";
+            } else {
+              echo "<div id='main-notice' class='text-center'>You Are Not Logged In.</div>";
+            }
+
+          ?>
+          
           <div id='session-list'>
             <!-- Populated by JS -->
           </div>

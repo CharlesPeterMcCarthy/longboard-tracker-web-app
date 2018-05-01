@@ -38,6 +38,8 @@ $(document).ready(function() {
           if (response['validLogin']) {
             $("#login-modal").modal("hide");
             ClearLoginForm();
+            ChangeMainNotice();
+            ShowLogoutButton();
             GetSessions();
           } else if (!response['emailExists']) {
             $("#login-email").css({'border' : '1px solid red'});
@@ -60,6 +62,14 @@ $(document).ready(function() {
     $("#login-pass").val("");
     $("#login-email").css({'border' : '1px solid #ccc'});
     $("#login-pass").css({'border' : '1px solid #ccc'});
+  }
+
+  function ChangeMainNotice() {
+    $("#main-notice").html("No Skate Sessions Yet.");
+  }
+
+  function ShowLogoutButton() {
+    $("#login-modal-trigger-btn").replaceWith("<button id='logout-btn' class='btn btn-xs btn-default'><i class='glyphicon glyphicon-log-out'></i> Logout</button>");
   }
 
   function GetSessions() {
