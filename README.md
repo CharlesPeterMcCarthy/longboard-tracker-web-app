@@ -29,6 +29,7 @@ The user should be able to get to this app via the web browser or via a link the
   - Change `{{USER_NAME}}` to the MySQL User Name
   - Change `{{PASSWORD}}` to the MySQL User Password
   - Change `{{DB_NAME}}` to the MySQL Database Name
+  
 *(The database information should be the same as the database information for the [API](https://github.com/CharlesPeterMcCarthy/longboard_api))*
 
 ![Login Screen Image](images/login.png?raw=true "Login Screen")
