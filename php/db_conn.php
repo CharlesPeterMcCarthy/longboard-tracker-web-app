@@ -1,10 +1,10 @@
 <?php
 
   function getConn() {
-    $servername = "localhost";
-    $username = "chazo";
-    $password = "#dingdong*";
-    $dbname = "iot_yun";
+    $servername = "{{SERVER_NAME}}";
+    $username = "{{USER_NAME}}";
+    $password = "{{PASSWORD}}";
+    $dbname = "{{DB_NAME}}";
 
     $conn = new mysqli($servername, $username, $password, $dbname); //Create connection
 
