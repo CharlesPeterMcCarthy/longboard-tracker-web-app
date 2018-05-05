@@ -23,8 +23,8 @@ The user should be able to get to this app via the web browser or via a link the
   - Total skate distance
   - A graph plotting the speed logs against the time
 
-![Login Screen Image](images/login.jpg?raw=true "Login Screen")
+![Login Screen Image](images/login.png?raw=true "Login Screen")
 
-![All Sessions Image](images/sessions.jpg?raw=true "All Sessions")
+![All Sessions Image](images/sessions.png?raw=true "All Sessions")
 
-![Session #178 Image](images/session178.jpg?raw=true "Session 178")
+![Session #178 Image](images/session178.png?raw=true "Session 178")
