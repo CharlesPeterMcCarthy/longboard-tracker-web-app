@@ -3,25 +3,10 @@ PHP & jQuery Web Application to view skate data that was calculated with an Ardu
 
 The user should be able to get to this app via the web browser or via a link they received in an email which is sent to them via the API ([API GitHub Repo](https://github.com/CharlesPeterMcCarthy/longboard_api))
 
-## How It Works
-- Basic info shown: Skate ID, skate start and end time.
-- More info: Skate length (seconds) and skate distance.
-- JavaScript Chart to display skate speeds.
-- New skate sessions are loaded into view.
-
-- When the user arrives to the main page (`skate_sessions.php`), they will need to login to view their skate sessions
-- When clicking the login button at the top of the page, a modal will drop down with input fields for the user email and password
-- The user email and password is different from the device name and password
-- When the user has successfully logged in, all of their previous skate sessions populate the screen.
-- Each session shows some brief information:
-  - Skate session ID number
-  - The start date-time
-  - The end date-time
-- If the user has arrived here via an email link, the corresponding skate session will be highlighted
-- When the user clicks on a certain session, it opens up and shows more information:
-  - Total skate length (in seconds)
-  - Total skate distance
-  - A graph plotting the speed logs against the time
+## How To Set Up
+  - Before you continue, you should have followed the steps to setting up the [MySQL Database](https://github.com/CharlesPeterMcCarthy/longboard_arduino)
+  - Change the values listed below under [To Use](https://github.com/CharlesPeterMcCarthy/longboard_web_app#to-use)
+  - Place these files on a remote web server (Same server as the [API](https://github.com/CharlesPeterMcCarthy/longboard_api))
 
 ### To Use
 **/php/db_conn.php**
@@ -29,7 +14,26 @@ The user should be able to get to this app via the web browser or via a link the
   - Change `{{USER_NAME}}` to the MySQL User Name
   - Change `{{PASSWORD}}` to the MySQL User Password
   - Change `{{DB_NAME}}` to the MySQL Database Name
-  
+
+## How It Works
+  - Basic info shown: Skate ID, skate start and end time.
+  - More info: Skate length (seconds) and skate distance.
+  - JavaScript Chart to display skate speeds.
+  - New skate sessions are loaded into view.
+  - When the user arrives to the main page (`skate_sessions.php`), they will need to login to view their skate sessions
+  - When clicking the login button at the top of the page, a modal will drop down with input fields for the user email and password
+  - The user email and password is different from the device name and password
+  - When the user has successfully logged in, all of their previous skate sessions populate the screen.
+  - Each session shows some brief information:
+    - Skate session ID number
+    - The start date-time
+    - The end date-time
+  - If the user has arrived here via an email link, the corresponding skate session will be highlighted
+  - When the user clicks on a certain session, it opens up and shows more information:
+    - Total skate length (in seconds)
+    - Total skate distance
+    - A graph plotting the speed logs against the time
+
 *(The database information should be the same as the database information for the [API](https://github.com/CharlesPeterMcCarthy/longboard_api))*
 
 ![Login Screen Image](images/login.png?raw=true "Login Screen")
